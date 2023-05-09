@@ -84,6 +84,7 @@ class Data(torch.utils.data.Dataset):
         self.text_process = TextProcess()
 
         print("Loading data json file from", json_path)
+        # TODO orient=record
         self.data = pd.read_json(json_path, lines=True)
 
         if valid:
