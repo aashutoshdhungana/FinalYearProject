@@ -23,6 +23,7 @@ if __name__ == '__main__':
     dataset = []
     files = get_files(folder_path)
     for file in files:
+        # TODO split into validation and test dataset
         filename, transcript = extract_metadata(file)
         print(filename, transcript)
         record = {}
