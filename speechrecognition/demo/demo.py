@@ -18,10 +18,11 @@ def index():
 
 @app.route("/start_asr")
 def start():
+    with open("transcript.txt") as f:
+        f.close()
     model_file = "asr_model.pt"
     ngram_file = ""
     asr_engine = SpeechRecognitionEngine(model_file, ngram_file)
-    print(asr_engine)
     action = DemoAction()
     asr_engine.run(action)
     return jsonify("speechrecognition start success!")
@@ -31,6 +32,7 @@ def start():
 def get_audio():
     with open('transcript.txt', 'r') as f:
         transcript = f.read()
+        f.close()
     return jsonify(transcript)
 
 
@@ -51,6 +53,7 @@ class DemoAction:
     def save_transcript(self, transcript):
         with open("transcript.txt", 'w+') as f:
             f.write(transcript)
+            f.close()
 
 
 # if __name__ == "__main__":
