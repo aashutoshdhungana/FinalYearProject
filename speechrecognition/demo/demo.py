@@ -18,6 +18,10 @@ def index():
 
 @app.route("/start_asr")
 def start():
+    model_file = "asr_model.pt"
+    ngram_file = ""
+    asr_engine = SpeechRecognitionEngine(model_file, ngram_file)
+    print(asr_engine)
     action = DemoAction()
     asr_engine.run(action)
     return jsonify("speechrecognition start success!")
@@ -49,13 +53,14 @@ class DemoAction:
             f.write(transcript)
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="demoing the speech recognition engine")
-    parser.add_argument('--model_file', type=str, default=None, required=True,
-                        help='optimized file to load. use optimize_graph.py')
-    parser.add_argument('--ken_lm_file', type=str, default=None, required=False,
-                        help='If you have an ngram lm use to decode')
-    args = parser.parse_args()
-    asr_engine = SpeechRecognitionEngine(args.model_file, args.ken_lm_file)
-    webbrowser.open_new('http://127.0.0.1:3000/')
-    app.run(port=3000)
+# if __name__ == "__main__":
+#     parser = argparse.ArgumentParser(description="demoing the speech recognition engine")
+#     parser.add_argument('--model_file', type=str, default=None, required=True,
+#                         help='optimized file to load. use optimize_graph.py')
+#     parser.add_argument('--ken_lm_file', type=str, default=None, required=False,
+#                         help='If you have an ngram lm use to decode')
+#     args = parser.parse_args()
+#     model_file = "speechrecognition.ckpt"
+#     asr_engine = SpeechRecognitionEngine(model_file, args.ken_lm_file)
+#     webbrowser.open_new('http://127.0.0.1:3000/')
+#     app.run(port=3000)
