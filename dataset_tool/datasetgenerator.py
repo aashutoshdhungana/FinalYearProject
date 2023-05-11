@@ -39,7 +39,7 @@ if __name__ == '__main__':
         filename, transcript = extract_metadata(file)
         # print(filename, transcript)
         record = {}
-        record["key"] = filename
+        record["key"] = "./dataset/audiofiles/" + filename
         record["text"] = transcript
         dataset.append(record)
     save_as_json(dataset, save_path)
