@@ -10,7 +10,6 @@ def get_files(dir_path):
     return os.listdir(dir_path)
 
 def extract_metadata(file_name):
-    print(file_name)
     full_path = folder_path + '/' + file_name
     audio = TinyTag.get(full_path)
     return file_name, audio.title
@@ -49,7 +48,7 @@ if __name__ == '__main__':
     dataset = np.array(dataset)
     split_position = math.floor(len(dataset)*0.8)
 
-    [train_dataset, test_dataset] = np.split(dataset,[split_position-1])
+    [train_dataset, test_dataset] = np.split(dataset,[split_position])
 
     save_as_json(train_dataset.tolist(), train_dataset_save_path)
     save_as_json(test_dataset.tolist(), test_dataset_save_path)
